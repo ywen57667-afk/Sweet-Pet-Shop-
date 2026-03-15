@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sweet Pet Shop</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Pacifico&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">Sweet Pet Shop 🐾</div>
+
+<nav>
+<a href="#">Home</a>
+<a href="#">Toys</a>
+<a href="#">About</a>
+<a href="#cart">Cart</a>
+</nav>
+
+</header>
+
+
+<!-- Banner -->
+
+<section class="banner">
+
+<img src="images/banner.jpg">
+
+<div class="banner-text">
+<h1>Sweet Pet Toys</h1>
+<p>Make Your Pet Happy Every Day 💕</p>
+</div>
+
+</section>
+
+
+
+<main>
+
+<h2 class="section-title">Cute Toys</h2>
+
+<div class="products">
+
+<div class="product">
+
+<img src="images/toy1.jpg">
+
+<h3>Pink Ball</h3>
+
+<p class="price">$9.99</p>
+
+<button onclick="addToCart('Pink Ball',9.99)">Add to Cart</button>
+
+</div>
+
+
+
+<div class="product">
+
+<img src="images/toy2.jpg">
+
+<h3>Fluffy Mouse</h3>
+
+<p class="price">$12.99</p>
+
+<button onclick="addToCart('Fluffy Mouse',12.99)">Add to Cart</button>
+
+</div>
+
+
+
+<div class="product">
+
+<img src="images/toy3.jpg">
+
+<h3>Rainbow Rope</h3>
+
+<p class="price">$8.99</p>
+
+<button onclick="addToCart('Rainbow Rope',8.99)">Add to Cart</button>
+
+</div>
+
+
+</div>
+
+
+
+<!-- CART -->
+
+<section id="cart">
+
+<h2>Your Cart 🛒</h2>
+
+<div id="cart-items">
+<p>Your cart is empty</p>
+</div>
+
+<p id="cart-total"></p>
+
+<button id="checkout-btn">Checkout 💖</button>
+
+</section>
+
+
+</main>
+
+
+<footer>
+
+<p>Sweet Pet Shop © 2026</p>
+
+</footer>
+
+<script src="js/main.js"></script>
+
+</body>
+</html>
