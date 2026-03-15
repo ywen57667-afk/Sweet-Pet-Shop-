@@ -100,3 +100,47 @@ const titleObserver = new IntersectionObserver((entries)=>{
 },{ threshold:0.3 });
 
 titleObserver.observe(sectionTitle);
+// Checkout 按钮触发 modal
+const checkoutBtn = document.getElementById('checkout-btn');
+const modal = document.getElementById('checkoutModal');
+const closeBtn = document.querySelector('.close-btn');
+const checkoutForm = document.getElementById('checkoutForm');
+
+checkoutBtn.addEventListener('click', ()=>{
+  if(cart.length===0){
+    alert('Your cart is empty!');
+    return;
+  }
+  modal.style.display='flex';
+});
+
+closeBtn.addEventListener('click', ()=>{ modal.style.display='none'; });
+
+// 点击 modal 外部关闭
+window.addEventListener('click', (e)=>{
+  if(e.target===modal) modal.style.display='none';
+});
+
+// 表单提交
+checkoutForm.addEventListener('submit', (e)=>{
+  e.preventDefault();
+  
+  // 收集用户信息
+  const customer = {
+    name: document.getElementById('name').value,
+    email: document.getElementById('email').value,
+    address: document.getElementById('address').value,
+    cart: cart
+  };
+
+  // 保存订单到本地或者发送到后端
+  console.log("New order:", customer);
+
+  // 跳转到 Wise 支付页面（示例使用固定链接或动态生成）
+  window.open("https://wise.com/paylink-demo", "_blank");
+
+  modal.style.display='none';
+  cart=[]; // 清空购物车
+  updateCart();
+  alert("Redirecting to payment. Thank you!");
+});
