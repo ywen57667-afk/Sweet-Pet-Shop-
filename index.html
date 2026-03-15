@@ -28,30 +28,32 @@
   </nav>
 </header>
 
-<!-- Banner -->
 <section class="banner">
   <img src="images/banner.jpg" alt="Sweet Pet Toys Banner">
-  <h1 class="banner-text">WELCOME</h1>
+  <div class="banner-text">
+    <h1>WELCOME</h1>
+    <p>Discover Cute Pet Keepsakes</p>
+  </div>
 </section>
 
 <main>
   <h2 class="section-title">Hot Toys</h2>
   <div class="products">
     <!-- 猫爪钥匙扣 -->
-    <div class="product" data-paylink="https://wise.com/paylink-demo">
+    <div class="product">
       <img src="images/catpaw-keychain.jpg" alt="Cat Paw Keychain">
       <h3>Cat Paw Keychain</h3>
       <p class="description">Cute leather cat paw keychain that can hold your pet's fur 🐾</p>
       <p class="price">¥68</p>
-      <button onclick="addToCart('Cat Paw Keychain', 68, 'https://wise.com/paylink-demo')">Add to Cart</button>
+      <button onclick="addToCart('Cat Paw Keychain', 68)">Add to Cart</button>
     </div>
 
     <!-- 示例产品 -->
-    <div class="product" data-paylink="https://wise.com/paylink-demo">
+    <div class="product">
       <img src="images/toy2.jpg" alt="Pet Ball">
       <h3>Pet Ball</h3>
       <p class="price">¥50</p>
-      <button onclick="addToCart('Pet Ball', 50, 'https://wise.com/paylink-demo')">Add to Cart</button>
+      <button onclick="addToCart('Pet Ball', 50)">Add to Cart</button>
     </div>
   </div>
 
@@ -72,7 +74,7 @@
 <div id="checkoutModal" class="modal">
   <div class="modal-content">
     <span class="close-btn">&times;</span>
-    <h2>Shipping Information</h2>
+    <h2>Shipping & Payment</h2>
     <form id="checkoutForm">
       <label for="name">Full Name:</label>
       <input type="text" id="name" required>
@@ -83,7 +85,13 @@
       <label for="address">Address:</label>
       <textarea id="address" required></textarea>
 
-      <button type="submit">Proceed to Payment</button>
+      <!-- QR -->
+      <div style="text-align:center; margin:20px 0;">
+        <p>Scan the QR code to pay with Alipay:</p>
+        <img src="images/alipay-qr.jpg" alt="Alipay QR Code" style="width:200px; border-radius:12px; box-shadow:0 5px 15px rgba(0,0,0,0.2);">
+      </div>
+
+      <button type="submit">I Have Paid</button>
     </form>
   </div>
 </div>
