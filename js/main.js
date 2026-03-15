@@ -6,7 +6,6 @@ function addToCart(name, price){
   updateCart();
   showToast(name + " added to cart 💕");
 }
-
 // 更新购物车显示
 function updateCart(){
   const cartItems = document.getElementById("cart-items");
