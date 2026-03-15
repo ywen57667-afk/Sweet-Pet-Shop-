@@ -1,57 +1,61 @@
 // 购物车
 let cart = [];
-function addToCart(name, price, paylink){
-  cart.push({name, price, paylink});
+
+function addToCart(name, price){
+  cart.push({name, price});
   updateCart();
-  showToast(`${name} added to cart!`);
+  showToast(name + " added to cart 💕");
 }
 
 function updateCart(){
-  const cartItems = document.getElementById('cart-items');
-  const cartTotal = document.getElementById('cart-total');
+  const cartItems = document.getElementById("cart-items");
+  const totalText = document.getElementById("cart-total");
   if(cart.length===0){
-    cartItems.innerHTML='<p>Your cart is empty.</p>';
-    cartTotal.textContent='';
+    cartItems.innerHTML="<p>Your cart is empty</p>";
+    totalText.textContent="";
     return;
   }
-  cartItems.innerHTML='';
+  cartItems.innerHTML="";
   let total=0;
   cart.forEach(item=>{
-    const div=document.createElement('div');
-    div.textContent=`${item.name} - ¥${item.price}`;
+    const div=document.createElement("div");
+    div.textContent = item.name + " - ¥" + item.price;
     cartItems.appendChild(div);
     total+=item.price;
   });
-  cartTotal.textContent=`Total: ¥${total}`;
+  totalText.textContent = "Total: ¥" + total.toFixed(2);
 }
 
 // Toast 提示
 function showToast(message){
-  const toast=document.createElement('div');
+  const toast=document.createElement("div");
   toast.textContent=message;
-  toast.style.position='fixed';
-  toast.style.bottom='20px';
-  toast.style.left='50%';
-  toast.style.transform='translateX(-50%)';
-  toast.style.background='rgba(255,111,165,0.9)';
-  toast.style.color='white';
-  toast.style.padding='12px 20px';
-  toast.style.borderRadius='25px';
-  toast.style.fontSize='14px';
-  toast.style.zIndex='1000';
+  toast.style.position="fixed";
+  toast.style.bottom="30px";
+  toast.style.left="50%";
+  toast.style.transform="translateX(-50%)";
+  toast.style.background="#ff6fa5";
+  toast.style.color="white";
+  toast.style.padding="12px 20px";
+  toast.style.borderRadius="25px";
+  toast.style.fontSize="14px";
+  toast.style.zIndex="1000";
   toast.style.opacity='0';
   toast.style.transition='opacity 0.5s ease';
   document.body.appendChild(toast);
   requestAnimationFrame(()=>{ toast.style.opacity='1'; });
-  setTimeout(()=>{ toast.style.opacity='0'; toast.addEventListener('transitionend',()=>toast.remove()); },2000);
+  setTimeout(()=>{
+    toast.style.opacity='0';
+    toast.addEventListener('transitionend',()=>toast.remove());
+  },2000);
 }
 
 // Banner 滚动浮动
 const bannerText = document.querySelector('.banner-text');
-window.addEventListener('scroll', () => {
+window.addEventListener('scroll', ()=>{
   const scrollY = window.scrollY;
   bannerText.style.transform = `translate(-50%, calc(-50% - ${scrollY*0.3}px))`;
-  bannerText.style.opacity = `${Math.max(1 - scrollY/400, 0)}`;
+  bannerText.style.opacity = `${Math.max(1 - scrollY/400,0)}`;
 });
 
 // 产品滚动淡入
@@ -87,12 +91,14 @@ checkoutBtn.addEventListener('click', ()=>{
   if(cart.length===0){ alert('Your cart is empty!'); return; }
   modal.style.display='flex';
 });
+
 closeBtn.addEventListener('click', ()=>{ modal.style.display='none'; });
 window.addEventListener('click', (e)=>{ if(e.target===modal) modal.style.display='none'; });
 
-// 表单提交
+// 用户点击“我已支付”
 checkoutForm.addEventListener('submit', (e)=>{
   e.preventDefault();
+
   const customer = {
     name: document.getElementById('name').value,
     email: document.getElementById('email').value,
@@ -109,15 +115,15 @@ checkoutForm.addEventListener('submit', (e)=>{
     address: customer.address
   };
 
+  // 发送订单邮件
   emailjs.send('YOUR_SERVICE_ID','template_m2drzub', templateParams)
     .then(response=>{
       console.log('Email sent!', response.status,response.text);
       showOrderSuccess();
       cart=[];
       updateCart();
-      window.open("https://wise.com/paylink-demo","_blank");
     }, err=>{
-      alert('Failed to send email, please try again.');
+      alert('Failed to send email');
       console.error(err);
     });
 
@@ -151,6 +157,8 @@ function showOrderSuccess(){
     successDiv.style.opacity='0';
     successDiv.addEventListener('transitionend',()=>successDiv.remove());
   },2500);
+
+  // 彩带粒子
   if(typeof confetti==='function'){
     confetti({particleCount:80, spread:70, origin:{y:0.6}});
   }
